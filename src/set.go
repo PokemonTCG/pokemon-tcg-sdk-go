@@ -7,24 +7,24 @@ import (
 )
 
 var (
-	//EndPointSets used to obtain infromation about card sets from the pokemontcg api
+	//EndPointSets used to obtain information about card sets from the pokemontcg api
 	EndPointSets = EndPoint + "/sets/"
 )
 
 // Set describes the official pokemon sets of cards
 type Set struct {
-	Code          string `json:code`
-	PtcgoCode     string `json:ptcgoCode`
-	Name          string `json:name`
-	Series        string `json:series`
-	TotalCards    int    `json:totalCards`
-	StandardLegal bool   `json:standardLegal`
-	ExpandedLegal bool   `json:expandedLegal`
-	SymbolURL     string `json:symbolUrl`
-	LogoURL       string `json:logoUrl`
+	Code          string `json:"code"`
+	PtcgoCode     string `json:"ptcgoCode"`
+	Name          string `json:"name"`
+	Series        string `json:"series"`
+	TotalCards    int    `json:"totalCards"`
+	StandardLegal bool   `json:"standardLegal"`
+	ExpandedLegal bool   `json:"expandedLegal"`
+	SymbolURL     string `json:"symbolUrl"`
+	LogoURL       string `json:"logoUrl"`
 	// TODO: Figure out a way to properly parse out the time
-	//	ReleasedDate  time.Time `json:releasedDate`
-	//	updatedAt     time.Time `json:updatedAt`
+	//	ReleasedDate  time.Time `json:"releasedDate"`
+	//	updatedAt     time.Time `json:"updatedAt"`
 }
 
 // GetSetByID returns as single pokemon card.

@@ -23,54 +23,54 @@ var (
 //PokemonCard -- contains all the needed information about a pokemon card
 type PokemonCard struct {
 	ID                    string       `json:"id"`
-	Name                  string       `json:name`
-	NationalPokedexNumber int          `json:nationalPokedexNumber`
-	ImageURL              string       `json:imageUrl`
-	ImageURLHiRes         string       `json:imageUrlHiRes`
-	Types                 []string     `json:types`
-	SuperType             string       `json:supertype`
-	SubType               string       `json:subtype`
-	EvolvesFrom           string       `json:evolvesFrom`
-	HP                    string       `json:hp`
-	RetreatCost           []string     `json:retreatCost`
-	Number                string       `json:number`
-	Artist                string       `json:artist`
-	Rarity                string       `json:rarity`
-	Series                string       `json:series`
-	Set                   string       `json:set`
-	SetCode               string       `json:setCode`
-	Attacks               []Attack     `json:attacks`
-	Weaknesses            []Weakness   `json:weaknesses`
-	Resistances           []Resistance `json:resistances`
-	Ability               Ability      `json:ability`
-	Text                  []string     `json:text`
+	Name                  string       `json:"name"`
+	NationalPokedexNumber int          `json:"nationalPokedexNumber"`
+	ImageURL              string       `json:"imageUrl"`
+	ImageURLHiRes         string       `json:"imageUrlHiRes"`
+	Types                 []string     `json:"types"`
+	SuperType             string       `json:"supertype"`
+	SubType               string       `json:"subtype"`
+	EvolvesFrom           string       `json:"evolvesFrom"`
+	HP                    string       `json:"hp"`
+	RetreatCost           []string     `json:"retreatCost"`
+	Number                string       `json:"number"`
+	Artist                string       `json:"artist"`
+	Rarity                string       `json:"rarity"`
+	Series                string       `json:"series"`
+	Set                   string       `json:"set"`
+	SetCode               string       `json:"setCode"`
+	Attacks               []Attack     `json:"attacks"`
+	Weaknesses            []Weakness   `json:"weaknesses"`
+	Resistances           []Resistance `json:"resistances"`
+	Ability               Ability      `json:"ability"`
+	Text                  []string     `json:"text"`
 }
 
 // Attack holds information for pokemon attacks
 type Attack struct {
-	Cost                []string `json:cost`
-	Name                string   `json:name`
-	Text                string   `json:text`
-	Damage              string   `json:damage`
-	ConvertedEnergyCost int      `json:convertedEnergyCost`
+	Cost                []string `json:"cost"`
+	Name                string   `json:"name"`
+	Text                string   `json:"text"`
+	Damage              string   `json:"damage"`
+	ConvertedEnergyCost int      `json:"convertedEnergyCost"`
 }
 
 // Weakness holds information for pokemon weaknesses
 type Weakness struct {
-	Type  string `json:type`
-	Value string `json:type`
+	Type  string `json:"type"`
+	Value string `json:"value"`
 }
 
 // Resistance holds information for pokemon weaknesses
 type Resistance struct {
-	Type  string `json:type`
-	Value string `json:type`
+	Type  string `json:"type"`
+	Value string `json:"value"`
 }
 
 // Ability holds pokemon ability information
 type Ability struct {
-	Name string `json:name`
-	Text string `json:text`
+	Name string `json:"name"`
+	Text string `json:"text"`
 }
 
 func formatQuery(endPoint string, params map[string]string) (string, error) {
