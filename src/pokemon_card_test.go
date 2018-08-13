@@ -5,6 +5,14 @@ import (
 	"testing"
 )
 
+func TestGetCardByIDBadID(t *testing.T) {
+	expectedError := "Unable to decode json response: json: cannot unmarshal number into Go value of type pokemontcgsdk.PokemonCard"
+	_, err := GetCardByID("BadInput")
+	if !strings.EqualFold(expectedError, err.Error()) {
+		t.Errorf("Expected error to say '%s',but got '%s'", expectedError, err.Error())
+	}
+}
+
 /*
 Test cards:
 - https://api.pokemontcg.io/v1/cards/xy7-54
