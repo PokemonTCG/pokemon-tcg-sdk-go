@@ -33,6 +33,7 @@ type PokemonCard struct {
 	EvolvesFrom           string       `json:"evolvesFrom"`
 	HP                    string       `json:"hp"`
 	RetreatCost           []string     `json:"retreatCost"`
+	ConvertedRetreatCost  int          `json:"convertedRetreatCost"`
 	Number                string       `json:"number"`
 	Artist                string       `json:"artist"`
 	Rarity                string       `json:"rarity"`
@@ -71,6 +72,7 @@ type Resistance struct {
 type Ability struct {
 	Name string `json:"name"`
 	Text string `json:"text"`
+	Type string `json:"type"`
 }
 
 func formatQuery(endPoint string, params map[string]string) (string, error) {
