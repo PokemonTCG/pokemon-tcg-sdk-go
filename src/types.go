@@ -7,14 +7,19 @@ import (
 )
 
 var (
-	//EndPointTypes used to obtain infromation about pokemone types from the pokemontcg api
+	//EndPointTypes used to obtain list of pokemon types from the pokemontcg api
 	EndPointTypes = EndPoint + "/types/"
+
+	//EndPointSubTypes used to obtain list of pokemon card subtypes
+	EndPointSubTypes = EndPoint + "/subtypes/"
+
+	//EndPointSuperTypes used to obtain list of pokemon case supertypes
+	EndPointSuperTypes = EndPoint + "/supertypes/"
 )
 
-// GetTypes returns a list of pokemon types.
-func GetTypes() (types []string, err error) {
+func getTypes(endPoint string, mapKey string) (types []string, err error) {
 	typesMap := make(map[string][]string)
-	resp, err := http.Get(EndPointTypes)
+	resp, err := http.Get(endPoint)
 	if err != nil {
 		return types, fmt.Errorf("unable to http.Get types: %s", err.Error())
 	}
@@ -26,10 +31,25 @@ func GetTypes() (types []string, err error) {
 	}
 
 	var ok bool
-	types, ok = typesMap["types"]
+	types, ok = typesMap[mapKey]
 	if !ok {
-		return types, fmt.Errorf("unable to get types from typesMap: %s", err.Error())
+		return types, fmt.Errorf("unable to get types from map: %s", err.Error())
 	}
 	return types, err
 
+}
+
+// GetTypes returns a list of pokemon types.
+func GetTypes() ([]string, error) {
+	return getTypes(EndPointTypes, "types")
+}
+
+// GetSubTypes returns a list of pokemon card subtypes
+func GetSubTypes() ([]string, error) {
+	return getTypes(EndPointSubTypes, "subtypes")
+}
+
+// GetSuperTypes returns a list of pokemon card supertypes
+func GetSuperTypes() ([]string, error) {
+	return getTypes(EndPointSuperTypes, "supertypes")
 }
