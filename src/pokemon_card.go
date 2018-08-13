@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 const (
@@ -14,7 +15,9 @@ const (
 
 var (
 	//EndPointCards used to obtain cards from the pokemontcg api
-	EndPointCards = EndPoint + "/cards/"
+	EndPointCards = EndPoint + "cards"
+	//EndPointCardID used to obtain a card by ID
+	EndPointCardID = EndPoint + "cards/"
 )
 
 //PokemonCard -- contains all the needed information about a pokemon card
@@ -70,10 +73,53 @@ type Ability struct {
 	Text string `json:text`
 }
 
+func formatQuery(endPoint string, params map[string]string) (string, error) {
+	u, err := url.Parse(endPoint)
+	if err != nil {
+		return "", fmt.Errorf("Unable to parse url endpoint: %s", err.Error())
+	}
+
+	query := u.Query()
+	for key, value := range params {
+		query.Set(key, value)
+	}
+	u.RawQuery = query.Encode()
+
+	return u.String(), nil
+}
+
+// GetCards Allows you to search and filter for cards by using the parameters
+// listed in the pokemontcg.io docs website (https://docs.pokemontcg.io/#api_v1cards_list)
+func GetCards(params map[string]string) (cards []PokemonCard, err error) {
+	urlQuery, err := formatQuery(EndPointCards, params)
+	if err != nil {
+		return cards, err
+	}
+
+	cardsMap := make(map[string][]PokemonCard)
+	resp, err := http.Get(urlQuery)
+	if err != nil {
+		return cards, fmt.Errorf("unable to http.Get cards: %s", err.Error())
+	}
+	defer resp.Body.Close()
+
+	err = json.NewDecoder(resp.Body).Decode(&cardsMap)
+	if err != nil {
+		return cards, fmt.Errorf("Unable to decode json response: %s", err.Error())
+	}
+
+	var ok bool
+	cards, ok = cardsMap["cards"]
+	if !ok {
+		return cards, fmt.Errorf("unable to get cards from cards map: %s", err.Error())
+	}
+	return cards, err
+}
+
 // GetCardByID returns as single pokemon card.
 func GetCardByID(ID string) (card PokemonCard, err error) {
 	cards := make(map[string]PokemonCard)
-	resp, err := http.Get(EndPointCards + ID)
+	resp, err := http.Get(EndPointCardID + ID)
 	if err != nil {
 		return card, fmt.Errorf("unable to http.Get card: %s", err.Error())
 	}
