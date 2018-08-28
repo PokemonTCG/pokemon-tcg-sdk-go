@@ -13,18 +13,17 @@ var (
 
 // Set describes the official pokemon sets of cards
 type Set struct {
-	Code          string `json:"code"`
-	PtcgoCode     string `json:"ptcgoCode"`
-	Name          string `json:"name"`
-	Series        string `json:"series"`
-	TotalCards    int    `json:"totalCards"`
-	StandardLegal bool   `json:"standardLegal"`
-	ExpandedLegal bool   `json:"expandedLegal"`
-	SymbolURL     string `json:"symbolUrl"`
-	LogoURL       string `json:"logoUrl"`
-	// TODO: Figure out a way to properly parse out the time
-	//	ReleasedDate  time.Time `json:"releasedDate"`
-	//	updatedAt     time.Time `json:"updatedAt"`
+	Code          string          `json:"code"`
+	PtcgoCode     string          `json:"ptcgoCode"`
+	Name          string          `json:"name"`
+	Series        string          `json:"series"`
+	TotalCards    int             `json:"totalCards"`
+	StandardLegal bool            `json:"standardLegal"`
+	ExpandedLegal bool            `json:"expandedLegal"`
+	SymbolURL     string          `json:"symbolUrl"`
+	LogoURL       string          `json:"logoUrl"`
+	ReleasedDate  json.RawMessage `json:"releasedDate"`
+	UpdatedAt     json.RawMessage `json:"updatedAt"`
 }
 
 // GetSetByID returns as single pokemon card.

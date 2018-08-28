@@ -29,6 +29,8 @@ func TestGetSetByID(t *testing.T) {
 		expandedLegal bool
 		symbolURL     string
 		logoURL       string
+		releasedDate  string
+		updatedAt     string
 	}{
 		{
 			"base1",
@@ -40,6 +42,8 @@ func TestGetSetByID(t *testing.T) {
 			false,
 			"https://images.pokemontcg.io/base1/symbol.png",
 			"https://images.pokemontcg.io/base1/logo.png",
+			"",
+			"\"06/06/2018 20:35:00\"",
 		},
 		{
 			"xy1",
@@ -51,6 +55,8 @@ func TestGetSetByID(t *testing.T) {
 			true,
 			"https://images.pokemontcg.io/xy1/symbol.png",
 			"https://images.pokemontcg.io/xy1/logo.png",
+			"",
+			"\"03/04/2018 10:35:00\"",
 		},
 	}
 
@@ -87,5 +93,13 @@ func TestGetSetByID(t *testing.T) {
 		if !strings.EqualFold(test.logoURL, set.LogoURL) {
 			t.Errorf("Case %d: Expected %v, but got %v", index, test.logoURL, set.LogoURL)
 		}
+
+		if !strings.EqualFold(test.releasedDate, string(set.ReleasedDate)) {
+			t.Errorf("Case %d: Expected %v, but got %v", index, test.releasedDate, string(set.ReleasedDate))
+		}
+		if !strings.EqualFold(test.updatedAt, string(set.UpdatedAt)) {
+			t.Errorf("Case %d: Expected %v, but got %v", index, test.updatedAt, string(set.UpdatedAt))
+		}
+
 	}
 }
