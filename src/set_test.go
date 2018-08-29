@@ -13,6 +13,34 @@ func TestGetSetByIDBadID(t *testing.T) {
 	}
 }
 
+func TestGetSets(t *testing.T) {
+	tests := []struct {
+		params            map[string]string
+		expectedNumOfSets int
+	}{
+		{
+			map[string]string{"series": "base"},
+			7,
+		},
+		{
+			map[string]string{"series": "xy"},
+			16,
+		},
+	}
+
+	for index, test := range tests {
+		sets, err := GetSets(test.params)
+		if err != nil {
+			t.Fatalf("GetSets failed: %s", err.Error())
+		}
+
+		if len(sets) != test.expectedNumOfSets {
+			t.Errorf("Case %d: Expected %d sets, but got %d", index, len(sets), test.expectedNumOfSets)
+		}
+
+	}
+}
+
 /*
 Test sets:
 - https://api.pokemontcg.io/v1/sets/xy1

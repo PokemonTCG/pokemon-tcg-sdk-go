@@ -90,7 +90,7 @@ func formatQuery(endPoint string, params map[string]string) (string, error) {
 	return u.String(), nil
 }
 
-// GetCards Allows you to search and filter for cards by using the parameters
+// GetCards allows you to search and filter for cards using the parameters
 // listed in the pokemontcg.io docs website (https://docs.pokemontcg.io/#api_v1cards_list)
 func GetCards(params map[string]string) (cards []PokemonCard, err error) {
 	urlQuery, err := formatQuery(EndPointCards, params)
