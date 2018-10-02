@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/crazcalm/go-pokemontcgsdk/src"
+	"github.com/PokemonTCG/pokemon-tcg-sdk-go/src"
 )
 
 func main() {
